@@ -1,19 +1,87 @@
 <!DOCTYPE html>
 <html>
+
+<head>
+  <title>Food calorie</title>
+</head>
+
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
 
-  <body>
-  <h3> What kind of food are you eating today? </h3>
-    <div ng-app>
-    <nav class="{{food}}" ng-click="$event.preventDefault()">
-      <a href="lettuce" ng-click="food='lettuce'" > Lettuce </a>
-      <a href="kale"  ng-click="food='kale'" > Kale </a>
+  <form ng-app ng-controller="FoodMenuController">
+    <h1> Food items and cals </h1>
 
-    </nav>
+    <ul>
+      <li ng-repeat="food in menu" ng-click="toggleActive(food)" ng-class="{active:menu.active}">
+      {{food.name}} <span> {{food.menu}} </span>
+      </li>
+    </ul>
 
-      <p ng-hide="food">Please pick a vegetable!</p>
-      <p ng-show="food"> Ok, I see that you picked <b> {{food}}. </b> </p>
 
-    </div>
-  </body>
+    <div class="total">
+      Total: <span> {{total()}} </span>
+
+  <script>
+
+    function FoodMenuController($scope) {
+      $scope.menu = [
+        {
+          name: "Chicken",
+          calories: 400,
+          active: false
+        },
+        {
+          name: "Turkey",
+          calories: 450,
+          active: false
+        },
+        {
+          name: "Pork",
+          calories: 500,
+          active: false
+        },
+        {
+          name: "Beef",
+          calories: 440,
+          active: false
+        },
+        {
+          name: "Sweet Potatoes",
+          calories: 300,
+          active: false
+        },
+        {
+          name: "Spinich",
+          calories: 100,
+          active: false
+        },
+        {
+          name: "Whey Protein Shake",
+          calories: 250,
+          active: false
+        }
+      ];
+
+      $scope.toggleActive = function(food) {
+        if(food.active) {
+          food.active = false;
+        } else {
+          food.active = true;
+        }
+      }
+
+      $scope.total = function() {
+        var total = 0;
+        angular.forEach($scope.menu, function(food) {
+          if(food.active) {
+            total += food.calories;
+          }
+        });
+        return total;
+      }
+
+    }
+  </script>
+
+  </form>
+
 </html>
