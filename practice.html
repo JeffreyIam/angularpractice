@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+
+  <body>
+  <h3> What kind of food are you eating today? </h3>
+    <div ng-app>
+    <nav class="{{food}}" ng-click="$event.preventDefault()">
+      <a href="lettuce" ng-click="food='lettuce'" > Lettuce </a>
+      <a href="kale"  ng-click="food='kale'" > Kale </a>
+
+    </nav>
+
+      <p ng-hide="food">Please pick a vegetable!</p>
+      <p ng-show="food"> Ok, I see that you picked <b> {{food}}. </b> </p>
+
+    </div>
+  </body>
+</html>
